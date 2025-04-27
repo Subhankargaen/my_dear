@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever in My Heart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2c003e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>');
+            opacity: 0.1;
+            animation: twinkle 8s linear infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        .messages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 142, 0.1));
+            z-index: -1;
+        }
+
+        .message-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+        }
+
+        .message-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #fff;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .message-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message-decoration i {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            animation: float 15s linear infinite;
+            opacity: 0;
+        }
+
+        .silhouette {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            opacity: 0.1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(255, 107, 107, 0.8); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 0.1; }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            .message-text {
+                font-size: 1.5rem;
+            }
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+            .silhouette {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="stars"></div>
+        <div class="floating-hearts">
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+            <span>❤️</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Forever in My Heart</h1>
+        </div>
+
+        <div class="messages-container">
+            <div class="message-card">
+                <p class="message-text">"I miss you more than words can say. Every moment without you feels like an eternity."</p>
+                <div class="message-decoration">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">"My heart still belongs to you, no matter how far apart we are. You're always in my thoughts."</p>
+                <div class="message-decoration">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">"No matter where life takes us, I'll always love you. You're my forever love."</p>
+                <div class="message-decoration">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">"Every star in the night sky reminds me of your beautiful eyes. I miss seeing them."</p>
+                <div class="message-decoration">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">"Your smile still brightens my darkest days. I hope you're happy, wherever you are."</p>
+                <div class="message-decoration">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">"Jaha sabu bi lekhichi nije english re lekhini kichi but translate kariki lekhichi dialogue boli vabibuni ....... At The End I Love You My Dear Wife"</p>
+                <div class="message-decoration">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="silhouette"></div>
+
+    <script>
+        // Generate floating hearts with random positions and delays
+        const hearts = document.querySelectorAll('.floating-hearts span');
+        hearts.forEach((heart, index) => {
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.animationDelay = `${index * 2}s`;
+        });
+    </script>
+</body>
+</html> 

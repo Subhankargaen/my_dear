@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Birthday Magic!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .welcome-container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .enter-button {
+            background: #fff;
+            color: #ff6b6b;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .enter-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.8rem;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 3rem;
+            }
+            .welcome-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="welcomeMusic" autoplay loop>
+        <source src="bi.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-control" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <div class="floating-elements">
+        <!-- Balloons -->
+        <span class="balloon" style="left: 10%; animation-delay: 0s;">🎈</span>
+        <span class="balloon" style="left: 20%; animation-delay: 1s;">🎈</span>
+        <span class="balloon" style="left: 30%; animation-delay: 2s;">🎈</span>
+        <span class="balloon" style="left: 40%; animation-delay: 3s;">🎈</span>
+        <span class="balloon" style="left: 50%; animation-delay: 4s;">🎈</span>
+        <span class="balloon" style="left: 60%; animation-delay: 5s;">🎈</span>
+        <span class="balloon" style="left: 70%; animation-delay: 6s;">🎈</span>
+        <span class="balloon" style="left: 80%; animation-delay: 7s;">🎈</span>
+        <span class="balloon" style="left: 90%; animation-delay: 8s;">🎈</span>
+
+        <!-- Sparkles -->
+        <span class="sparkle" style="left: 15%; top: 20%; animation-delay: 0.5s;">✨</span>
+        <span class="sparkle" style="left: 25%; top: 40%; animation-delay: 1.5s;">✨</span>
+        <span class="sparkle" style="left: 35%; top: 60%; animation-delay: 2.5s;">✨</span>
+        <span class="sparkle" style="left: 45%; top: 30%; animation-delay: 3.5s;">✨</span>
+        <span class="sparkle" style="left: 55%; top: 50%; animation-delay: 4.5s;">✨</span>
+        <span class="sparkle" style="left: 65%; top: 70%; animation-delay: 5.5s;">✨</span>
+        <span class="sparkle" style="left: 75%; top: 40%; animation-delay: 6.5s;">✨</span>
+        <span class="sparkle" style="left: 85%; top: 60%; animation-delay: 7.5s;">✨</span>
+
+        <!-- Hearts -->
+        <span class="heart" style="left: 20%; animation-delay: 0.2s;">❤️</span>
+        <span class="heart" style="left: 40%; animation-delay: 1.2s;">❤️</span>
+        <span class="heart" style="left: 60%; animation-delay: 2.2s;">❤️</span>
+        <span class="heart" style="left: 80%; animation-delay: 3.2s;">❤️</span>
+    </div>
+
+    <div class="welcome-container">
+        <h1 class="welcome-title">A Special Day Awaits You!</h1>
+        <p class="welcome-subtitle">Get ready for some birthday magic and surprises!</p>
+        <a href="index.html" class="enter-button">Enter the Celebration</a>
+    </div>
+
+    <script>
+        function toggleMusic() {
+            const music = document.getElementById('welcomeMusic');
+            const button = document.querySelector('.music-control i');
+            
+            if (music.paused) {
+                music.play();
+                button.classList.remove('fa-volume-mute');
+                button.classList.add('fa-music');
+            } else {
+                music.pause();
+                button.classList.remove('fa-music');
+                button.classList.add('fa-volume-mute');
+            }
+        }
+    </script>
+</body>
+</html> 
